@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/floating_mine.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Enemy.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.4702, 13.7598 )
+
+[node name="Kamikaze" type="Area2D"]
+position = Vector2( -3.99426, 0.840895 )
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 2 )
+speed = 25.0
+hitpoints = 50.0
+dijkstra = "distance_to_base"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 3.97917, -0.885465 )
+scale = Vector2( 0.0917131, 0.0864096 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 44.5726, 29.5804, 294.657, 319.632 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 17.5212, 12.907 )
+shape = SubResource( 1 )
