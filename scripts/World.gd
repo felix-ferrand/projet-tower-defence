@@ -9,6 +9,7 @@ export (PackedScene) var obstacle_entity
 var entities = []
 var defences = {}
 var tile_map
+var entity_tab = [{}]
 var dijkstra = {}
 var graphs = {}
 var entity_lookups = {}
@@ -149,6 +150,7 @@ func add_entity(entity, pos):
 		for x in range(tilemap_entity.width):
 			for y in range(tilemap_entity.height):
 				entity_positions.append(Vector2(tile_pos.x + x, tile_pos.y + y))
+
 		# pour chaque "tag" on a une liste d'entités et un graphe Dijkstra
 		# on les créé ici s'ils n'existent pas déjà
 		if tilemap_entity.tag:
@@ -180,6 +182,7 @@ func add_entity(entity, pos):
 			entity_lookups[tilemap_entity.tag].append(pos)
 		if shooter:
 			add_shooter_cost(pos, shooter.attack_range)
+			entity_tab.append({"position": pos, "tower": entity})
 			
 	# on doit recalculer tous le graphes car il y a de nouveaux obstacles à contourner
 	for map in dijkstra:
