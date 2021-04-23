@@ -48,9 +48,9 @@ func _create_wave():
 		var defences = get_node("..").defences
 		
 		# add unit to use depending on defences
-		if "gun-tower" in defences:
+		if "blue-tower" in defences:
 			units_to_use.append(units[0])
-		if "missile-tower" in defences:
+		if "red-tower" in defences:
 			units_to_use.append(units[1])
 	
 	# select from the units to use, while checking the price
