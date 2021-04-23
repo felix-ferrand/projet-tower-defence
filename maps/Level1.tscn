@@ -38,14 +38,5 @@ tag = "base"
 [node name="Spawner" type="Node2D" parent="."]
 position = Vector2( 116, 696 )
 script = ExtResource( 6 )
-waves = [ {
-"enemies": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ],
-"wait": 10.0
-}, {
-"enemies": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ],
-"wait": 30.0
-}, {
-"enemies": [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ), ExtResource( 2 ) ],
-"wait": 30.0
-} ]
+units = [ ExtResource( 3 ), ExtResource( 2 ) ]
 interval = 4.0

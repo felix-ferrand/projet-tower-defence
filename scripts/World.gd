@@ -6,6 +6,7 @@ export (int) var starting_money = 200
 export var movement_costs = {}
 export (float) var tower_cost = 10
 var entities = []
+var defences = {}
 var tile_map
 var dijkstra = {}
 var graphs = {}
@@ -116,6 +117,13 @@ func add_entity(entity, pos):
 	var shooter = entity.get_node_or_null("Shooter")
 	
 	for pos in entity_positions:
+		# on remplit la liste des défenses
+		if "type" in entity:
+			var type = entity.type
+			if type in defences:
+				defences[type] += 1
+			else:
+				defences[type] = 1
 		# on remplit la grille des entités
 		entities[pos.x][pos.y] = entity
 		# et on met à jour la grille des coûts, car on ne peut pas traverser une entité (pour le moment!)
@@ -159,6 +167,14 @@ func remove_entity(entity):
 	
 	var shooter = entity.get_node_or_null("Shooter")
 	for pos in entity_positions:
+		# enlever de la liste des défenses
+		if "type" in entity:
+			var type = entity.type
+			if type in defences:
+				if defences[type] > 1:
+					defences[type] -= 1
+				else:
+					defences.erase(type)
 		# enlever de la grille des entités
 		entities[pos.x][pos.y] = null
 		# rétablir le coût maintenant qu'on peut traverser la case

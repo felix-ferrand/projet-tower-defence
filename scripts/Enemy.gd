@@ -5,6 +5,7 @@ export (float) var speed = 1
 export (float) var hitpoints = 20
 export (String) var dijkstra
 export (int) var reward = 30
+export (int) var price = 50
 var destination
 var world
 
