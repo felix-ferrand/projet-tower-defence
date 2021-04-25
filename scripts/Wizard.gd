@@ -1,5 +1,5 @@
 extends TileMapEntity
-class_name Medic
+class_name Wizard
 
 var menu_index
 export (String) var dijkstra

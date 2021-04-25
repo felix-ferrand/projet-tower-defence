@@ -4,7 +4,7 @@ export (int) var width = 64
 export (int) var height = 64
 export (int) var starting_money = 200000
 export var movement_costs = {}
-export (float) var tower_cost = 10
+export (float) var tower_cost = 40
 var entities = []
 var defences = {}
 var tile_map
@@ -115,7 +115,7 @@ func add_entity(entity, pos):
 	
 	# on veut savoir quel catégorie de terrain se trouve à cette position
 	var group = tile_map.get_group(tile_pos)
-	if group == 'road' || group == 'water' || group == 'tree': return	
+	if group == 'road' || group == 'water' || group == 'tree' || group == 'destructible': return	
 	if !group:
 		print_debug("tile %s has no group" % tile_map.get_cell_autotile_coord(tile_pos.x, tile_pos.y))
 	
@@ -277,7 +277,7 @@ func add_friendly(friendly, pos):
 	
 	# on veut savoir quel catégorie de terrain se trouve à cette position
 	var group = tile_map.get_group(tile_pos)
-	if group == 'road' || group == 'water' || group == 'tree': return	
+	if group == 'road' || group == 'water' || group == 'tree' || group == 'destructible': return
 	if !group:
 		print_debug("tile %s has no group" % tile_map.get_cell_autotile_coord(tile_pos.x, tile_pos.y))
 		

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/M484VerticalShmupSet2-30x30.png-cc380a7d352b57bb6577822ec0ceb7c6.stex"
+path="res://.import/base.png-f65eb06642cc9fd08fc37e4496e98ceb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/M484VerticalShmupSet2-30x30.png"
-dest_files=[ "res://.import/M484VerticalShmupSet2-30x30.png-cc380a7d352b57bb6577822ec0ceb7c6.stex" ]
+source_file="res://sprites/base.png"
+dest_files=[ "res://.import/base.png-f65eb06642cc9fd08fc37e4496e98ceb.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

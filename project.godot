@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/Enemy.gd"
 }, {
-"base": "TileMapEntity",
-"class": "Medic",
-"language": "GDScript",
-"path": "res://scripts/Medic.gd"
-}, {
 "base": "Reference",
 "class": "PriorityQueue",
 "language": "GDScript",
@@ -53,17 +48,22 @@ _global_script_classes=[ {
 "class": "Tower",
 "language": "GDScript",
 "path": "res://scripts/Tower.gd"
+}, {
+"base": "TileMapEntity",
+"class": "Wizard",
+"language": "GDScript",
+"path": "res://scripts/Wizard.gd"
 } ]
 _global_script_class_icons={
 "DijkstraMap": "",
 "Enemy": "",
-"Medic": "",
 "PriorityQueue": "",
 "Projectile": "",
 "Shooter": "",
 "Spawner": "",
 "TileMapEntity": "",
-"Tower": ""
+"Tower": "",
+"Wizard": ""
 }
 
 [application]

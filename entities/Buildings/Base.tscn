@@ -1,20 +1,19 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://sprites/defences.png" type="Texture" id=1]
+[ext_resource path="res://sprites/base.png" type="Texture" id=1]
 [ext_resource path="res://scripts/TileMapEntity.gd" type="Script" id=2]
 
 [node name="Base" type="Area2D"]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 2 )
-width = 4
-height = 3
-hitpoints = 100.0
-hitpointsMax = 100.0
+width = 2
+height = 2
+hitpoints = 200.0
+hitpointsMax = 200.0
 tag = "base"
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 64, 48 )
+position = Vector2( 1.88992, 5.66966 )
 texture = ExtResource( 1 )
-region_enabled = true
 region_rect = Rect2( 212, 0, 124, 100 )
