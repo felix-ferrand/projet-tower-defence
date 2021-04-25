@@ -68,14 +68,14 @@ _global_script_class_icons={
 
 [application]
 
-config/name="projet-tower-defence"
+config/name="Formation-IA-Sebastien-Boutin"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1650
-window/size/height=720
+window/size/width=1270
+window/size/height=608
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
