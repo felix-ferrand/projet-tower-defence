@@ -13,7 +13,7 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
 speed = 35.0
-dijkstra = "avoid_range_go_to_base"
+dijkstra = "avoid_range_go_to_tower"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

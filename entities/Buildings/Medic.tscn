@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Medic.gd" type="Script" id=1]
+[ext_resource path="res://sprites/M484VerticalShmupSet1-29x29.png" type="Texture" id=2]
+
+[node name="Medic" type="Area2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 1 )
+tag = "medic"
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 799.207, 251.793, 20.9502, 22.3468 )

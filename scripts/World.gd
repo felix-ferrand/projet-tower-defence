@@ -2,7 +2,7 @@ extends Node2D
 
 export (int) var width = 64
 export (int) var height = 64
-export (int) var starting_money = 200
+export (int) var starting_money = 200000
 export var movement_costs = {}
 export (float) var tower_cost = 10
 var entities = []
@@ -100,6 +100,7 @@ func add_entity(entity, pos):
 		print_debug("tile %s has no group" % tile_map.get_cell_autotile_coord(tile_pos.x, tile_pos.y))
 	
 	# certaines entités occupent plusieurs cases et on doit traiter chacune d'elles
+	print_debug(entity.tag)
 	var tilemap_entity = entity as TileMapEntity
 	var entity_positions = []
 	if tilemap_entity:

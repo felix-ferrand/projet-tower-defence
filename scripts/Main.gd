@@ -1,11 +1,14 @@
 extends Node2D
 
 export var towers = []
+export var medics = []
 export (PackedScene) var map
 var world
 var state = "playing" setget state_set
 var current_map
 var tower_index = 0
+var medic_index = 0
+var type_building = ''
 var money setget money_set
 
 signal state_change(state)
@@ -26,12 +29,20 @@ func _ready():
 func _unhandled_input(event):
 	if !world: return
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed && towers.size():
+		if event.button_index == BUTTON_LEFT && event.pressed && towers.size() && type_building == 'tower':
 			var cost = towers[tower_index].cost
 			if cost > money: return
 			var new_tower = towers[tower_index].scene.instance()
 			new_tower.menu_index = tower_index
 			var entity = world.add_entity(new_tower, event.position)
+			if entity: money_set(money - cost)
+		if event.button_index == BUTTON_LEFT && event.pressed && medics.size() && type_building == 'medic':
+			var cost = medics[medic_index].cost
+			if cost > money: return
+			var new_medic = medics[medic_index].scene.instance()
+			new_medic.menu_index = medic_index
+			print_debug(new_medic.tag)
+			var entity = world.add_entity(new_medic, event.position)
 			if entity: money_set(money - cost)
 		if event.button_index == BUTTON_RIGHT && event.pressed:
 			var tile_pos = world.tile_map.world_to_map(event.position)
