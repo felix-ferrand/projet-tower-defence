@@ -7,13 +7,14 @@
 collision_layer = 8
 collision_mask = 0
 script = ExtResource( 2 )
-width = 8
-height = 8
+width = 4
+height = 3
 hitpoints = 100.0
 hitpointsMax = 100.0
+tag = "base"
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 75, 75 )
+position = Vector2( 64, 48 )
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 200, 0, 150, 150 )
+region_rect = Rect2( 212, 0, 124, 100 )

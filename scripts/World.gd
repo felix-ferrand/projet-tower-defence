@@ -24,7 +24,7 @@ signal on_change
 func get_cost(pos):
 	var group = tile_map.get_group(pos)
 	# les cases eau et arbre ne peuvent pas être traversées
-	if group == 'water' || group == 'tree': return null
+	if group == 'water' || group == 'tree' || group == 'destructible': return null
 	# si on a renseigné un coût pour ce type de terrain, on l'applique ici
 	elif movement_costs.has(group): return movement_costs[group]
 	# sinon le coût par défaut c'est 1
