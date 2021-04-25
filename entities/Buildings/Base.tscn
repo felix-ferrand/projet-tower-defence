@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 width = 8
 height = 8
 hitpoints = 100.0
+hitpointsMax = 100.0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 75, 75 )

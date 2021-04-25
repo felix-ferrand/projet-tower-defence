@@ -1,15 +1,26 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Medic.gd" type="Script" id=1]
 [ext_resource path="res://sprites/M484VerticalShmupSet1-29x29.png" type="Texture" id=2]
+[ext_resource path="res://entities/Projectiles/Heal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/Shooter.gd" type="Script" id=4]
 
 [node name="Medic" type="Area2D"]
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 1 )
 tag = "medic"
+dijkstra = "test"
+speed = 30.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 799.207, 251.793, 20.9502, 22.3468 )
+
+[node name="Shooter" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
+attack_range = 200.0
+projectile = ExtResource( 3 )

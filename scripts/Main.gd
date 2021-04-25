@@ -41,8 +41,7 @@ func _unhandled_input(event):
 			if cost > money: return
 			var new_medic = medics[medic_index].scene.instance()
 			new_medic.menu_index = medic_index
-			print_debug(new_medic.tag)
-			var entity = world.add_entity(new_medic, event.position)
+			var entity = world.add_friendly(new_medic, event.position)
 			if entity: money_set(money - cost)
 		if event.button_index == BUTTON_RIGHT && event.pressed:
 			var tile_pos = world.tile_map.world_to_map(event.position)

@@ -14,7 +14,10 @@ var entity_lookups = {}
 var spawners = []
 var enemies = []
 const quadrants = [Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
-
+var friendlies = []
+var lower_life = 99999
+var lower_towers = []
+	
 signal on_change
 
 # retourner le coût de déplacement d'une case
@@ -60,6 +63,23 @@ func _ready():
 	# on veut déclencher la défaite si la base est détruite
 	base.connect("tree_exited", self, "_on_defeat")
 	
+	# Create a timer node
+	var timer = Timer.new()
+
+	# Set timer interval
+	timer.set_wait_time(5.0)
+
+	# Set it as repeat
+	timer.set_one_shot(false)
+
+	# Connect its timeout signal to the function you want to repeat
+	timer.connect("timeout", self, "getTowerLowLife")
+
+	# Add to the tree as child of the current node
+	add_child(timer)
+
+	timer.start()
+	
 func add_shooter_cost(pos, attack_range):
 	var tile_range = ceil(attack_range / tile_map.cell_size.x)
 	for x in range(tile_range):
@@ -100,7 +120,6 @@ func add_entity(entity, pos):
 		print_debug("tile %s has no group" % tile_map.get_cell_autotile_coord(tile_pos.x, tile_pos.y))
 	
 	# certaines entités occupent plusieurs cases et on doit traiter chacune d'elles
-	print_debug(entity.tag)
 	var tilemap_entity = entity as TileMapEntity
 	var entity_positions = []
 	if tilemap_entity:
@@ -149,6 +168,30 @@ func add_entity(entity, pos):
 	emit_signal("on_change")
 	return entity
 	
+
+func getTowerLowLife():
+	# s'il existe au moins une tour
+	if entity_lookups && entity_lookups.has('tower'):
+		for tower_pos in entity_lookups['tower']:
+			var tower = entities[tower_pos.x][tower_pos.y]
+			# si la tour possède moins de point de vie que la tour stockée actuelement
+			if tower.hitpoints < lower_life:
+				lower_life = tower.hitpoints
+				lower_towers = [tower_pos]
+			# Pour chaque tour, on vérifie qu'elle existe encore
+			# Si elle n'existe plus, on stocke une nouvelle tour
+			for lower_tower in lower_towers:
+				if !entities[lower_tower.x][lower_tower.y]:
+					lower_life = tower.hitpoints
+					lower_towers = [tower_pos]
+			# s'il existe une tour avec le même montant de point de vie que la tour stockée actuellement
+			# on l'ajoute si elle n'y est pas déjà
+			if tower.hitpoints == lower_life && !lower_towers.has(tower_pos):
+				lower_towers.append(tower_pos)
+	if lower_towers: 
+		dijkstra['test'] = DijkstraMap.new(lower_towers, graphs['cost'])	
+		dijkstra['test'].calculate()
+	
 # enlever une entité des systèmes "world"
 func remove_entity(entity):
 	if get_node("/root/Main").state != "playing": return
@@ -184,6 +227,7 @@ func remove_entity(entity):
 		# enlever de la liste par tag
 		if tilemap_entity && tilemap_entity.tag && entity_lookups[tilemap_entity.tag]:
 			entity_lookups[tilemap_entity.tag].erase(pos)
+			getTowerLowLife()
 		if shooter:
 			reset_shooter_cost(pos, shooter.attack_range)
 			
@@ -224,3 +268,21 @@ func _on_defeat():
 	if !is_inside_tree(): return
 	print_debug("Defeat!")
 	get_node("/root/Main").state = "defeated"
+
+func add_friendly(friendly, pos):
+	var tile_pos = tile_map.world_to_map(pos)
+	# si la position est en dehors de la grille, on ne peut rien faire
+	# s'il existe déjà une entité à cette position, on veut éviter de construire par dessus
+	if tile_pos.x < 0 || tile_pos.x > entities.size() - 1 || tile_pos.y < 0 || tile_pos.y > entities[tile_pos.x].size() - 1 || entities[tile_pos.x][tile_pos.y]: return
+	
+	# on veut savoir quel catégorie de terrain se trouve à cette position
+	var group = tile_map.get_group(tile_pos)
+	if group == 'road' || group == 'water' || group == 'tree': return	
+	if !group:
+		print_debug("tile %s has no group" % tile_map.get_cell_autotile_coord(tile_pos.x, tile_pos.y))
+		
+	friendly.position = Vector2(tile_pos.x * tile_map.cell_size.x, tile_pos.y * tile_map.cell_size.y)
+	friendly.z_index = tile_pos.y
+	friendlies.append(friendly)
+	add_child(friendly)
+	friendly.world = self
