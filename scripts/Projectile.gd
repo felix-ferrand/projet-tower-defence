@@ -1,4 +1,5 @@
 extends Area2D
+class_name Projectile
 
 export (float) var damage = 1
 export (float) var speed = 10
