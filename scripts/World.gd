@@ -121,6 +121,10 @@ func add_entity(entity, pos):
 	# s'il existe déjà une entité à cette position, on veut éviter de construire par dessus
 	if tile_pos.x < 0 || tile_pos.x > entities.size() - 1 || tile_pos.y < 0 || tile_pos.y > entities[tile_pos.x].size() - 1 || entities[tile_pos.x][tile_pos.y]: return
 	
+	for enemie in enemies:
+		if tile_pos == tile_map.world_to_map(enemie.position):
+			return
+			
 	# on veut savoir quel catégorie de terrain se trouve à cette position
 	var group = tile_map.get_group(tile_pos)
 	if group == 'road' || group == 'water' || group == 'tree' || group == 'destructible': return	
