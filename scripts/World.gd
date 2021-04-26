@@ -17,6 +17,7 @@ const quadrants = [Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1
 var friendlies = []
 var lower_life = 99999
 var lower_towers = []
+var wave_index = 0
 	
 signal on_change
 
@@ -256,13 +257,6 @@ func add_enemy(enemy):
 func remove_enemy(enemy):
 	enemies.erase(enemy)
 	var main = get_node("/root/Main")
-	# s'il n'y a plus d'ennemis, et que tous les spawners ont
-	# terminé toutes leurs vagues, on a gagné
-	if enemies.size(): return
-	for spawner in spawners:
-		if spawner.wave_index < spawner.waves.size(): return
-	print_debug("Victory!")
-	main.state = "victorious"
 
 func _on_defeat():
 	if !is_inside_tree(): return

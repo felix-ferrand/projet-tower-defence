@@ -25,7 +25,11 @@ func _process(delta):
 		if (distance < move_amount):
 			destination = tile_map.map_to_world(world.dijkstra[dijkstra].get_next(tile_pos))
 		position = position.move_toward(destination, move_amount)
-		
+		if (destination.x > position.x):
+			get_node("AnimatedSprite").set_flip_h(false)
+		elif (destination.x < position.x):
+			get_node("AnimatedSprite").set_flip_h(true)
+
 func take_damage(amount):
 	hitpoints -= amount
 	if (hitpoints <= 0):
