@@ -9,7 +9,6 @@ export (PackedScene) var obstacle_entity
 var entities = []
 var defences = {}
 var tile_map
-var entity_tab = [{}]
 var dijkstra = {}
 var graphs = {}
 var entity_lookups = {}
@@ -182,7 +181,6 @@ func add_entity(entity, pos):
 			entity_lookups[tilemap_entity.tag].append(pos)
 		if shooter:
 			add_shooter_cost(pos, shooter.attack_range)
-			entity_tab.append({"position": pos, "tower": entity})
 			
 	# on doit recalculer tous le graphes car il y a de nouveaux obstacles à contourner
 	for map in dijkstra:
@@ -208,7 +206,7 @@ func getTowerLowLife():
 		
 		# Pour toutes les tours qui existent
 		for tower_pos in entity_lookups['tower']:
-				
+			
 			var tower = entities[tower_pos.x][tower_pos.y]
 			var missing_life = calculateMissingLife(tower)
 			
