@@ -12,6 +12,7 @@
 script = ExtResource( 3 )
 width = 33
 height = 19
+starting_money = 200
 movement_costs = {
 "grass": 2.0,
 "road": 1.0
@@ -42,9 +43,11 @@ units = [ ExtResource( 6 ), ExtResource( 5 ) ]
 [node name="Spawner2" type="Node2D" parent="."]
 position = Vector2( 1024, 416 )
 script = ExtResource( 7 )
+spawner_index = 1
 units = [ ExtResource( 6 ), ExtResource( 5 ) ]
 
 [node name="Spawner3" type="Node2D" parent="."]
 position = Vector2( 160, 576 )
 script = ExtResource( 7 )
+spawner_index = 2
 units = [ ExtResource( 6 ), ExtResource( 5 ) ]
