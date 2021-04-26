@@ -15,7 +15,7 @@ var spawners = []
 var enemies = []
 const quadrants = [Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
 var friendlies = []
-var lower_life = 99999
+var lower_life = 0
 var lower_towers = []
 	
 signal on_change
@@ -179,26 +179,30 @@ func add_entity(entity, pos):
 	emit_signal("on_change")
 	return entity
 	
+func calculateMissingLife(tower):
+	var missing_life = tower.hitpoints_max - tower.hitpoints
+	return missing_life
 
 func getTowerLowLife():
+	lower_towers = []
 	# s'il existe au moins une tour
 	if entity_lookups && entity_lookups.has('tower'):
+		
+		# Pour toutes les tours qui existent
 		for tower_pos in entity_lookups['tower']:
+				
 			var tower = entities[tower_pos.x][tower_pos.y]
+			var missing_life = calculateMissingLife(tower)
+			
 			# si la tour possède moins de point de vie que la tour stockée actuelement
-			if tower.hitpoints < lower_life:
-				lower_life = tower.hitpoints
-				lower_towers = [tower_pos]
-			# Pour chaque tour, on vérifie qu'elle existe encore
-			# Si elle n'existe plus, on stocke une nouvelle tour
-			for lower_tower in lower_towers:
-				if !entities[lower_tower.x][lower_tower.y]:
-					lower_life = tower.hitpoints
-					lower_towers = [tower_pos]
-			# s'il existe une tour avec le même montant de point de vie que la tour stockée actuellement
-			# on l'ajoute si elle n'y est pas déjà
-			if tower.hitpoints == lower_life && !lower_towers.has(tower_pos):
+			if missing_life > 0 && !lower_towers.has(tower_pos):
+				#lower_towers = [tower_pos]
 				lower_towers.append(tower_pos)
+				
+		# s'il n'y a pas de tour de renseignée on renseigne toute les tours
+		if !lower_towers:
+				lower_towers = entity_lookups['tower']	
+				
 	if lower_towers: 
 		dijkstra['test'] = DijkstraMap.new(lower_towers, graphs['cost_medic'])	
 		dijkstra['test'].calculate()
