@@ -48,6 +48,14 @@ func _ready():
 		for y in range(height):
 			graphs['cost'][x][y] = get_cost(Vector2(x, y))
 		
+	# intialiser la grille des coûts de déplacement pour les medics
+	graphs['cost_medic'] = []
+	for x in range(width):
+		graphs['cost_medic'].append([])
+		graphs['cost_medic'][x].resize(height)
+		for y in range(height):
+			graphs['cost_medic'][x][y] = get_cost(Vector2(x, y))
+		
 	# initialiser la grille des coûts modifiée par les tours	
 	graphs['range_cost'] = []
 	for x in range(width):
@@ -146,9 +154,12 @@ func add_entity(entity, pos):
 				defences[type] = 1
 		# on remplit la grille des entités
 		entities[pos.x][pos.y] = entity
+		
 		# et on met à jour la grille des coûts, car on ne peut pas traverser une entité (pour le moment!)
 		for graph in graphs:
-			graphs[graph][pos.x][pos.y] = null
+			if graph != 'cost_medic':
+				graphs[graph][pos.x][pos.y] = null
+				
 		# on l'ajoute aussi à la liste de son tag
 		if tilemap_entity && tilemap_entity.tag:
 			entity_lookups[tilemap_entity.tag].append(pos)
@@ -189,7 +200,7 @@ func getTowerLowLife():
 			if tower.hitpoints == lower_life && !lower_towers.has(tower_pos):
 				lower_towers.append(tower_pos)
 	if lower_towers: 
-		dijkstra['test'] = DijkstraMap.new(lower_towers, graphs['cost'])	
+		dijkstra['test'] = DijkstraMap.new(lower_towers, graphs['cost_medic'])	
 		dijkstra['test'].calculate()
 	
 # enlever une entité des systèmes "world"

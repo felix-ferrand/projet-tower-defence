@@ -10,7 +10,6 @@ script = ExtResource( 2 )
 width = 2
 height = 2
 hitpoints = 200.0
-hitpointsMax = 200.0
 tag = "base"
 
 [node name="Sprite" type="Sprite" parent="."]
