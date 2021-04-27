@@ -42,7 +42,7 @@ duration = 2.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 5 )
-frame = 1
+frame = 2
 speed_scale = 2.0
 playing = true
 
