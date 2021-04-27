@@ -15,7 +15,7 @@ var spawners = []
 var enemies = []
 const quadrants = [Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
 var friendlies = []
-var lower_life = 99999
+var lower_life = 0
 var lower_towers = []
 var wave_index = 0
 	
@@ -48,6 +48,14 @@ func _ready():
 		graphs['cost'][x].resize(height)
 		for y in range(height):
 			graphs['cost'][x][y] = get_cost(Vector2(x, y))
+		
+	# intialiser la grille des coûts de déplacement pour les medics
+	graphs['cost_medic'] = []
+	for x in range(width):
+		graphs['cost_medic'].append([])
+		graphs['cost_medic'][x].resize(height)
+		for y in range(height):
+			graphs['cost_medic'][x][y] = get_cost(Vector2(x, y))
 		
 	# initialiser la grille des coûts modifiée par les tours	
 	graphs['range_cost'] = []
@@ -114,6 +122,10 @@ func add_entity(entity, pos):
 	# s'il existe déjà une entité à cette position, on veut éviter de construire par dessus
 	if tile_pos.x < 0 || tile_pos.x > entities.size() - 1 || tile_pos.y < 0 || tile_pos.y > entities[tile_pos.x].size() - 1 || entities[tile_pos.x][tile_pos.y]: return
 	
+	for enemie in enemies:
+		if tile_pos == tile_map.world_to_map(enemie.position):
+			return
+			
 	# on veut savoir quel catégorie de terrain se trouve à cette position
 	var group = tile_map.get_group(tile_pos)
 	if group == 'road' || group == 'water' || group == 'tree' || group == 'destructible': return	
@@ -147,9 +159,12 @@ func add_entity(entity, pos):
 				defences[type] = 1
 		# on remplit la grille des entités
 		entities[pos.x][pos.y] = entity
+		
 		# et on met à jour la grille des coûts, car on ne peut pas traverser une entité (pour le moment!)
 		for graph in graphs:
-			graphs[graph][pos.x][pos.y] = null
+			if graph != 'cost_medic':
+				graphs[graph][pos.x][pos.y] = null
+				
 		# on l'ajoute aussi à la liste de son tag
 		if tilemap_entity && tilemap_entity.tag:
 			entity_lookups[tilemap_entity.tag].append(pos)
@@ -169,28 +184,32 @@ func add_entity(entity, pos):
 	emit_signal("on_change")
 	return entity
 	
+func calculateMissingLife(tower):
+	var missing_life = tower.hitpoints_max - tower.hitpoints
+	return missing_life
 
 func getTowerLowLife():
+	lower_towers = []
 	# s'il existe au moins une tour
 	if entity_lookups && entity_lookups.has('tower'):
+		
+		# Pour toutes les tours qui existent
 		for tower_pos in entity_lookups['tower']:
+				
 			var tower = entities[tower_pos.x][tower_pos.y]
+			var missing_life = calculateMissingLife(tower)
+			
 			# si la tour possède moins de point de vie que la tour stockée actuelement
-			if tower.hitpoints < lower_life:
-				lower_life = tower.hitpoints
-				lower_towers = [tower_pos]
-			# Pour chaque tour, on vérifie qu'elle existe encore
-			# Si elle n'existe plus, on stocke une nouvelle tour
-			for lower_tower in lower_towers:
-				if !entities[lower_tower.x][lower_tower.y]:
-					lower_life = tower.hitpoints
-					lower_towers = [tower_pos]
-			# s'il existe une tour avec le même montant de point de vie que la tour stockée actuellement
-			# on l'ajoute si elle n'y est pas déjà
-			if tower.hitpoints == lower_life && !lower_towers.has(tower_pos):
+			if missing_life > 0 && !lower_towers.has(tower_pos):
+				#lower_towers = [tower_pos]
 				lower_towers.append(tower_pos)
+				
+		# s'il n'y a pas de tour de renseignée on renseigne toute les tours
+		if !lower_towers:
+				lower_towers = entity_lookups['tower']	
+				
 	if lower_towers: 
-		dijkstra['test'] = DijkstraMap.new(lower_towers, graphs['cost'])	
+		dijkstra['test'] = DijkstraMap.new(lower_towers, graphs['cost_medic'])	
 		dijkstra['test'].calculate()
 	
 # enlever une entité des systèmes "world"

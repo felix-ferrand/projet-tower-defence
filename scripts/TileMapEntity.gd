@@ -5,7 +5,7 @@ class_name TileMapEntity
 export (int) var width = 1
 export (int) var height = 1
 export (float) var hitpoints = 50
-export (float) var hitpointsMax = 50
+export (float) var hitpoints_max = 50
 export (String) var tag
 
 func _ready():
@@ -25,5 +25,5 @@ func take_damage(amount):
 		get_node("..").remove_entity(self)
 		
 func heal(amount):
-	if (hitpoints < hitpointsMax):
+	if (hitpoints < hitpoints_max):
 		hitpoints += amount

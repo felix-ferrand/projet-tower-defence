@@ -37,7 +37,7 @@ animations = [ {
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 2 )
-hitpoints = 40.0
+hitpoints = 50.0
 tag = "tower"
 type = "blue-tower"
 
@@ -45,7 +45,7 @@ type = "blue-tower"
 position = Vector2( 0, -32 )
 scale = Vector2( 0.64, 0.64 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 speed_scale = 0.8
 playing = true
 centered = false
