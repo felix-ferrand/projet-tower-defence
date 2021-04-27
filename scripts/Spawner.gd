@@ -36,7 +36,7 @@ func _create_wave():
 	# generate wave dict
 	wave = {
 		"enemies": [],
-		"wait": 10.0
+		"wait": 5.0
 	}
 	
 	var units_to_use = []
@@ -69,7 +69,7 @@ func _create_wave():
 	
 func _start_wave():
 	# for the first waves : the Spawner activates one after the other
-	if world.wave_index >= (spawner_index * 3):
+	if world.wave_index >= spawner_index * 3:
 		_create_wave()
 		spawn_timer.stop()
 		wave_timer.start(wave.wait)
@@ -83,7 +83,6 @@ func _on_wave_timer():
 	print_debug("Wave %s!" % (world.wave_index + 1))
 	
 func _on_spawn_timer():
-	print_debug("_on_spawn_timer")
 	if spawn_index < wave.enemies.size():
 		var enemy = wave.enemies[spawn_index]
 		world.add_enemy(enemy)
@@ -92,7 +91,8 @@ func _on_spawn_timer():
 		spawn_index += 1
 	if world.enemies.size() == 0:
 		spawn_index = 0
-		world.wave_index += 1
+		if spawner_index == 0:
+			world.wave_index += 1
 		_start_wave()
 		
 func _on_game_state(state):
