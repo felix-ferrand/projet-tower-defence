@@ -320,17 +320,3 @@ func add_obstacle(obstacle, tile_pos):
 	var pos_x = (tile_pos.x * tile_map.cell_size.x) + (tile_map.cell_size.x / 2);
 	var pos_y = (tile_pos.y * tile_map.cell_size.y) + (tile_map.cell_size.y / 2);
 	add_entity(obstacle, Vector2(pos_x, pos_y));
-#	# si la position est en dehors de la grille, on ne peut rien faire
-#	# s'il existe déjà une entité à cette position, on veut éviter de construire par dessus
-#	if tile_pos.x < 0 || tile_pos.x > entities.size() - 1 || tile_pos.y < 0 || tile_pos.y > entities[tile_pos.x].size() - 1 || entities[tile_pos.x][tile_pos.y]: return
-#
-#	# on veut que l'obstacle soit placé sur une case destrictible
-#	var group = tile_map.get_group(tile_pos)
-#	if group != 'destructible': return
-#	if !group:
-#		print_debug("tile %s has no group" % tile_map.get_cell_autotile_coord(tile_pos.x, tile_pos.y))
-#
-#	obstacle.position = Vector2(tile_pos.x * tile_map.cell_size.x, tile_pos.y * tile_map.cell_size.y)
-#	obstacle.z_index = tile_pos.y
-#	friendlies.append(obstacle)
-#	add_child(obstacle)

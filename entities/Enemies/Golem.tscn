@@ -5,7 +5,7 @@
 [ext_resource path="res://sprites/unit.png" type="Texture" id=3]
 [ext_resource path="res://entities/Projectiles/Rocs.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10.5629, 17.0033 )
 
 [sub_resource type="AtlasTexture" id=2]
@@ -66,7 +66,7 @@ dijkstra = "distance_to_obstacle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 11, 16 )
-shape = SubResource( 11 )
+shape = SubResource( 1 )
 
 [node name="Shooter" type="Area2D" parent="."]
 position = Vector2( 3.8147e-06, 0.0662174 )
@@ -80,4 +80,5 @@ projectile = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 11.7725, 16.1873 )
 frames = SubResource( 10 )
+frame = 6
 playing = true
