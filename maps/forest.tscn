@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entities/Buildings/Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/TileMapLookup.gd" type="Script" id=2]
@@ -8,16 +8,11 @@
 [ext_resource path="res://entities/Enemies/Ogre.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/Spawner.gd" type="Script" id=7]
 [ext_resource path="res://entities/Enemies/Golem.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/Buildings/Obstacle.tscn" type="PackedScene" id=9]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
-width = 33
-height = 19
-starting_money = 200
-movement_costs = {
-"grass": 2.0,
-"road": 1.0
-}
+obstacle_entity = ExtResource( 9 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
