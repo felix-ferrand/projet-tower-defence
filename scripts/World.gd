@@ -5,6 +5,7 @@ export (int) var height = 64
 export (int) var starting_money = 200000
 export var movement_costs = {}
 export (float) var tower_cost = 40
+export (PackedScene) var obstacle_entity
 var entities = []
 var defences = {}
 var tile_map
@@ -25,7 +26,7 @@ signal on_change
 func get_cost(pos):
 	var group = tile_map.get_group(pos)
 	# les cases eau et arbre ne peuvent pas être traversées
-	if group == 'water' || group == 'tree' || group == 'destructible': return null
+	if group == 'water' || group == 'tree': return null
 	# si on a renseigné un coût pour ce type de terrain, on l'applique ici
 	elif movement_costs.has(group): return movement_costs[group]
 	# sinon le coût par défaut c'est 1
@@ -71,6 +72,14 @@ func _ready():
 	
 	# on veut déclencher la défaite si la base est détruite
 	base.connect("tree_exited", self, "_on_defeat")
+	
+	# ajout des entités "obstacles" sur les cases destructibles
+	for x in range(width):
+		for y in range(height):
+				var group = tile_map.get_group(Vector2(x, y));
+				
+				if group == 'destructible':
+					add_obstacle(obstacle_entity.instance(), Vector2(x, y));
 	
 	# Create a timer node
 	var timer = Timer.new()
@@ -128,7 +137,8 @@ func add_entity(entity, pos):
 			
 	# on veut savoir quel catégorie de terrain se trouve à cette position
 	var group = tile_map.get_group(tile_pos)
-	if group == 'road' || group == 'water' || group == 'tree' || group == 'destructible': return	
+	if group == 'road' || group == 'water' || group == 'tree': return	
+	# || group == 'destructible'
 	if !group:
 		print_debug("tile %s has no group" % tile_map.get_cell_autotile_coord(tile_pos.x, tile_pos.y))
 	
@@ -239,6 +249,10 @@ func remove_entity(entity):
 					defences[type] -= 1
 				else:
 					defences.erase(type)
+					
+		if "tag" in entity && entity.tag == "obstacle":
+			tile_map.set_cell(tile_pos.x, tile_pos.y, 0, false, false, false, Vector2(0, 0))
+			
 		# enlever de la grille des entités
 		entities[pos.x][pos.y] = null
 		# rétablir le coût maintenant qu'on peut traverser la case
@@ -298,4 +312,11 @@ func add_friendly(friendly, pos):
 	friendly.z_index = tile_pos.y
 	friendlies.append(friendly)
 	add_child(friendly)
-	friendly.world = self
+	if "world" in friendly:
+		friendly.world = self
+		
+		
+func add_obstacle(obstacle, tile_pos):
+	var pos_x = (tile_pos.x * tile_map.cell_size.x) + (tile_map.cell_size.x / 2);
+	var pos_y = (tile_pos.y * tile_map.cell_size.y) + (tile_map.cell_size.y / 2);
+	add_entity(obstacle, Vector2(pos_x, pos_y));
