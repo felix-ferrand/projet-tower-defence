@@ -77,7 +77,7 @@ func _ready():
 	for x in range(width):
 		for y in range(height):
 				var group = tile_map.get_group(Vector2(x, y));
-				# les cases eau et arbre ne peuvent pas être traversées
+				
 				if group == 'destructible':
 					add_obstacle(obstacle_entity.instance(), Vector2(x, y));
 	
@@ -249,6 +249,10 @@ func remove_entity(entity):
 					defences[type] -= 1
 				else:
 					defences.erase(type)
+					
+		if "tag" in entity && entity.tag == "obstacle":
+			tile_map.set_cell(tile_pos.x, tile_pos.y, 0, false, false, false, Vector2(0, 0))
+			
 		# enlever de la grille des entités
 		entities[pos.x][pos.y] = null
 		# rétablir le coût maintenant qu'on peut traverser la case
@@ -313,7 +317,9 @@ func add_friendly(friendly, pos):
 		
 		
 func add_obstacle(obstacle, tile_pos):
-	add_entity(obstacle, Vector2(tile_pos.x * tile_map.cell_size.x, tile_pos.y * tile_map.cell_size.y));
+	var pos_x = (tile_pos.x * tile_map.cell_size.x) + (tile_map.cell_size.x / 2);
+	var pos_y = (tile_pos.y * tile_map.cell_size.y) + (tile_map.cell_size.y / 2);
+	add_entity(obstacle, Vector2(pos_x, pos_y));
 #	# si la position est en dehors de la grille, on ne peut rien faire
 #	# s'il existe déjà une entité à cette position, on veut éviter de construire par dessus
 #	if tile_pos.x < 0 || tile_pos.x > entities.size() - 1 || tile_pos.y < 0 || tile_pos.y > entities[tile_pos.x].size() - 1 || entities[tile_pos.x][tile_pos.y]: return
