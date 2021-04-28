@@ -36,6 +36,7 @@ func _unhandled_input(event):
 			var new_tower = towers[tower_index].scene.instance()
 			new_tower.menu_index = tower_index
 			var cost_update = cost * pow(1.5,nb_entities)
+			cost_update = round(cost_update/10)*10
 			if money - cost_update < 0:
 					return
 			var entity = world.add_entity(new_tower, event.position)
