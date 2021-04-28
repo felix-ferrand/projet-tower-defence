@@ -149,6 +149,7 @@ func add_entity(entity, pos):
 		for x in range(tilemap_entity.width):
 			for y in range(tilemap_entity.height):
 				entity_positions.append(Vector2(tile_pos.x + x, tile_pos.y + y))
+
 		# pour chaque "tag" on a une liste d'entités et un graphe Dijkstra
 		# on les créé ici s'ils n'existent pas déjà
 		if tilemap_entity.tag:
@@ -205,7 +206,7 @@ func getTowerLowLife():
 		
 		# Pour toutes les tours qui existent
 		for tower_pos in entity_lookups['tower']:
-				
+			
 			var tower = entities[tower_pos.x][tower_pos.y]
 			var missing_life = calculateMissingLife(tower)
 			
