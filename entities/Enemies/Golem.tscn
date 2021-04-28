@@ -57,6 +57,8 @@ animations = [ {
 } ]
 
 [node name="Golem" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource( 1 )
 speed = 10.0
 hitpoints = 150.0
@@ -78,5 +80,4 @@ projectile = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 11.7725, 16.1873 )
 frames = SubResource( 10 )
-frame = 6
 playing = true

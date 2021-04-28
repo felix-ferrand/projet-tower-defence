@@ -39,11 +39,11 @@ func _create_wave():
 		"wait": 5.0
 	}
 	
-	var units_to_use = []
+	var units_to_use = [units[2]]
 	
 	# for the first waves : only one unit type to teach the player how they work
 	if world.wave_index < units.size():
-		units_to_use.append(units[2])
+		units_to_use.append(units[world.wave_index]);
 
 	# detect player defences and select which units_to_use
 	else:

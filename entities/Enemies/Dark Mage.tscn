@@ -77,5 +77,5 @@ projectile = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 8, 7 )
 frames = SubResource( 10 )
-frame = 3
+frame = 5
 playing = true
