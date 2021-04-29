@@ -327,7 +327,11 @@ func add_friendly(friendly, pos):
 	if "world" in friendly:
 		friendly.world = self
 	return friendly
-		
+
+func remove_friendly(friendly):
+	friendlies.erase(friendly)
+	friendly.queue_free()
+	emit_signal("on_change")
 		
 func add_obstacle(obstacle, tile_pos):
 	var pos_x = (tile_pos.x * tile_map.cell_size.x) + (tile_map.cell_size.x / 2);
