@@ -72,7 +72,7 @@ shape = SubResource( 1 )
 
 [node name="Shooter" type="Area2D" parent="."]
 position = Vector2( 3.8147e-06, 0.0662174 )
-collision_layer = 0
+collision_layer = 40
 collision_mask = 2147483656
 script = ExtResource( 2 )
 attack_range = 34.0

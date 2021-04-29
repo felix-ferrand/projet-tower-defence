@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/TileMapEntity.gd" type="Script" id=1]
 
 [node name="Obstacle" type="Area2D"]
-collision_layer = 8
+collision_layer = 32
 collision_mask = 0
 script = ExtResource( 1 )
 hitpoints = 500.0
