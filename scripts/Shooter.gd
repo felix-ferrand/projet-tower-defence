@@ -37,5 +37,5 @@ func shoot():
 		parent.get_node("..").add_child(bullet)
 		bullet.collision_layer = 0
 		bullet.collision_mask = collision_mask
-		bullet.position = parent.position
+		bullet.position = parent.position + Vector2(16,16)
 		bullet.fire((target.position - parent.position + Vector2(16,16)).normalized())
