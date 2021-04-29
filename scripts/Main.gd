@@ -13,6 +13,8 @@ var money setget money_set
 export var cost_update = 0
 export var increase_cost = 40
 export var nb_entities = 0
+export var nb_medics = 0
+
 var building_ui = load("res://scripts/BuildingUI.gd").new()
 
 signal state_change(state)
@@ -47,15 +49,24 @@ func _unhandled_input(event):
 			var entity = world.add_entity(new_tower, event.position)
 			if entity: 
 				money_set(money - cost_update)
-				building_ui.increase_cost()
+				building_ui.increase_cost_tower()
 				nb_entities += 1
 		if event.button_index == BUTTON_LEFT && event.pressed && medics.size() && type_building == 'medic':
 			var cost = medics[medic_index].cost
 			if cost > money: return
+			if nb_medics != 0:
+				cost_update = cost + increase_cost * nb_entities
+			else:
+				cost_update = cost
+			if money - cost_update < 0:
+					return
 			var new_medic = medics[medic_index].scene.instance()
 			new_medic.menu_index = medic_index
 			var entity = world.add_friendly(new_medic, event.position)
-			if entity: money_set(money - cost)
+			if entity: 
+				money_set(money - cost_update)
+				building_ui.increase_cost_medic()
+				nb_medics += 1
 		if event.button_index == BUTTON_RIGHT && event.pressed:
 			var tile_pos = world.tile_map.world_to_map(event.position)
 			if tile_pos.x > 0 && tile_pos.x < world.width && tile_pos.y > 0 && tile_pos.y < world.height && world.entities[tile_pos.x][tile_pos.y]:
@@ -67,9 +78,10 @@ func _unhandled_input(event):
 					else:
 						cost_update = cost
 					money_set(money + cost_update / 2)
-					building_ui.decrease_cost()
+					building_ui.decrease_cost_tower()
 					world.remove_entity(entity)
 					nb_entities -= 1
+			var tile_map = world.get_tile_map()
 	if Input.is_action_just_pressed("toggle_debug"):
 		get_node("DebugDrawing").cycle()
 	if Input.is_action_just_pressed("force_reload"):
