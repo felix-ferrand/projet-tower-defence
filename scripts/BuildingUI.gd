@@ -30,11 +30,10 @@ func _on_button_medic(indexWizard):
 	main.medic_index = indexWizard
 	main.type_building = 'medic'
 	
-func calculate_cost(label_cost, nb_entities):
-	var cost = float(label_cost.text) * 1.5
-	cost = round(cost/10)*10
-	return str(cost)
-	
-func update_cost(nb_entities):
+func increase_cost():
 	for label_cost in labels_cost:
-		label_cost.text = calculate_cost(label_cost, nb_entities)
+		label_cost.text = str(float(label_cost.text) + 40)
+	
+func decrease_cost():
+	for label_cost in labels_cost:
+		label_cost.text = str(float(label_cost.text) - 40)
