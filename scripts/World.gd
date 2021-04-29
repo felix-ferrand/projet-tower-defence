@@ -38,6 +38,8 @@ func _ready():
 	for x in range(width):
 		entities.append([])
 		entities[x].resize(height)
+		friendlies.append([])
+		friendlies[x].resize(height)
 		
 	# stocker une référence à la "tile map"
 	tile_map = get_node("TileMap")
@@ -315,9 +317,14 @@ func add_friendly(friendly, pos):
 	add_child(friendly)
 	if "world" in friendly:
 		friendly.world = self
+	return friendly
 		
 		
 func add_obstacle(obstacle, tile_pos):
 	var pos_x = (tile_pos.x * tile_map.cell_size.x) + (tile_map.cell_size.x / 2);
 	var pos_y = (tile_pos.y * tile_map.cell_size.y) + (tile_map.cell_size.y / 2);
 	add_entity(obstacle, Vector2(pos_x, pos_y));
+	
+	
+func get_tile_map():
+	return tile_map
