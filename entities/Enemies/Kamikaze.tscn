@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/Kamikaze.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 17 )
+extents = Vector2( 13, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -67,12 +67,11 @@ reward = 60
 price = 150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 10, 14 )
+position = Vector2( 16, 17 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 10.2356, 13.9882 )
-scale = Vector2( 0.835938, 1.04688 )
+position = Vector2( 16, 16 )
 frames = SubResource( 10 )
-frame = 4
+frame = 2
 playing = true

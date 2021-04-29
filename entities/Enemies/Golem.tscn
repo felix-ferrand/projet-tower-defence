@@ -5,7 +5,7 @@
 [ext_resource path="res://sprites/unit.png" type="Texture" id=3]
 [ext_resource path="res://entities/Projectiles/Physic.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10.5629, 17.0033 )
 
 [sub_resource type="AtlasTexture" id=2]
@@ -48,7 +48,7 @@ flags = 4
 atlas = ExtResource( 3 )
 region = Rect2( 224, 0, 32, 32 )
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=10]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
 "loop": true,
@@ -60,15 +60,15 @@ animations = [ {
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 1 )
-speed = 5.0
-hitpoints = 150.0
+speed = 7.0
+hitpoints = 75.0
 dijkstra = "avoid_range_go_to_obstacle"
 reward = 50
 price = 150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 11, 16 )
-shape = SubResource( 10 )
+position = Vector2( 14, 16 )
+shape = SubResource( 1 )
 
 [node name="Shooter" type="Area2D" parent="."]
 position = Vector2( 3.8147e-06, 0.0662174 )
@@ -80,7 +80,7 @@ attack_speed = 3.0
 projectile = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 11.7725, 16.1873 )
-frames = SubResource( 11 )
+position = Vector2( 15.7725, 16.1873 )
+frames = SubResource( 10 )
 frame = 3
 playing = true

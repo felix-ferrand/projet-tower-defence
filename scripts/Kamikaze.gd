@@ -53,7 +53,6 @@ func give_damage(target):
 	print(target)	 
 	if target.has_method("take_damage"): 
 		target.take_damage(damage_points)
-		print(target.hitpoints)	
 		
 	# On détruit le kamikaze après avoir infligé les dégats
 	queue_free()

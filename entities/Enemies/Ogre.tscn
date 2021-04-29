@@ -6,7 +6,7 @@
 [ext_resource path="res://scripts/Shooter.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 14 )
+extents = Vector2( 12, 15 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
@@ -63,9 +63,10 @@ script = ExtResource( 2 )
 speed = 25.0
 hitpoints = 50.0
 dijkstra = "avoid_range_go_to_base"
+reward = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 11, 11 )
+position = Vector2( 15, 13 )
 shape = SubResource( 1 )
 
 [node name="Shooter" type="Area2D" parent="."]
@@ -77,7 +78,7 @@ attack_speed = 0.25
 projectile = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 12, 9.5 )
+position = Vector2( 16, 10.9719 )
 frames = SubResource( 10 )
-frame = 6
+frame = 1
 playing = true

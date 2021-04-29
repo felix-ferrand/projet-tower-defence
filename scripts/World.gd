@@ -3,8 +3,9 @@ extends Node2D
 export (int) var width = 64
 export (int) var height = 64
 export (int) var starting_money = 300
-export var movement_costs = {}
+export (int) var wait_between_waves = 10
 export (float) var tower_cost = 40
+export var movement_costs = {}
 export (PackedScene) var obstacle_entity
 var entities = []
 var defences = {}
@@ -19,7 +20,8 @@ var friendlies = []
 var lower_life = 0
 var lower_towers = []
 var wave_index = 0
-	
+var wave_timer: Timer
+
 signal on_change
 
 # retourner le coût de déplacement d'une case
@@ -99,6 +101,12 @@ func _ready():
 	add_child(timer)
 
 	timer.start()
+
+	wave_timer = Timer.new()
+	wave_timer.connect("timeout", self, "_on_wave_timer")
+	add_child(wave_timer)
+	
+	_trigger_new_wave()
 	
 func add_shooter_cost(pos, attack_range):
 	var tile_range = ceil(attack_range / tile_map.cell_size.x)
@@ -292,6 +300,7 @@ func add_enemy(enemy):
 	
 func remove_enemy(enemy):
 	enemies.erase(enemy)
+	_check_wave_status()
 	var main = get_node("/root/Main")
 
 func _on_defeat():
@@ -325,6 +334,29 @@ func add_obstacle(obstacle, tile_pos):
 	var pos_y = (tile_pos.y * tile_map.cell_size.y) + (tile_map.cell_size.y / 2);
 	add_entity(obstacle, Vector2(pos_x, pos_y));
 	
-	
 func get_tile_map():
 	return tile_map
+
+func _check_wave_status():
+	var all_spawned = true
+	for spawner in spawners:
+		if all_spawned && spawner.wave.has("ennemies") :
+			all_spawned = spawner.wave.enemies.size() == spawner.spawn_index
+	
+	if all_spawned && enemies.size() == 0:
+		wave_index += 1
+		_trigger_new_wave()
+
+func _trigger_new_wave():
+	for spawner in spawners:
+		spawner.spawn_index = 0
+		spawner.spawn_timer.stop()
+		if wave_index >= spawner.spawner_index * 3:
+			print_debug("Wave %s starting in %s seconds" % [wave_index + 1, wait_between_waves])
+			wave_timer.start(wait_between_waves)
+			spawner._create_wave()
+			
+func _on_wave_timer():
+	for spawner in spawners:
+		if wave_index >= spawner.spawner_index * 3:
+			spawner._start_wave()

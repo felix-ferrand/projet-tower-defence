@@ -62,10 +62,10 @@ collision_mask = 0
 script = ExtResource( 1 )
 speed = 35.0
 dijkstra = "distance_to_base"
-reward = 35
+reward = 45
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 8, 12 )
+position = Vector2( 17, 21 )
 shape = SubResource( 1 )
 
 [node name="Shooter" type="Area2D" parent="."]
@@ -76,7 +76,7 @@ attack_range = 50.0
 projectile = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 8, 7 )
+position = Vector2( 17, 16 )
 frames = SubResource( 10 )
-frame = 5
+frame = 1
 playing = true
