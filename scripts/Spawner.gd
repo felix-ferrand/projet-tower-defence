@@ -36,10 +36,10 @@ func _create_wave():
 	# generate wave dict
 	wave = {
 		"enemies": [],
-		"wait": 5.0
+		"wait": 10.0
 	}
 	
-	var units_to_use = [units[2]]
+	var units_to_use = []
 	
 	# for the first waves : only one unit type to teach the player how they work
 	if world.wave_index < units.size():
@@ -52,9 +52,11 @@ func _create_wave():
 		
 		# add unit to use depending on defences
 		if "blue-tower" in defences:
-			units_to_use.append(units[1])
-		if "red-tower" in defences:
 			units_to_use.append(units[0])
+			units_to_use.append(units[2])
+		if "red-tower" in defences:
+			units_to_use.append(units[1])
+			units_to_use.append(units[3])
 		
 		if units_to_use.empty():
 			units_to_use.append(units[0])
