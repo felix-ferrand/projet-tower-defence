@@ -60,9 +60,11 @@ animations = [ {
 collision_layer = 4
 collision_mask = 2
 script = ExtResource( 1 )
-speed = 10.0
+speed = 5.0
 hitpoints = 150.0
-dijkstra = "distance_to_obstacle"
+dijkstra = "avoid_range_go_to_obstacle"
+reward = 50
+price = 150
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 11, 16 )
