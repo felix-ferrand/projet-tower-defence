@@ -22,6 +22,9 @@ func _ready():
 func take_damage(amount):
 	hitpoints -= amount
 	if (hitpoints <= 0):
+		if tag == 'medic':
+			get_node("..").remove_friendly(self)
+			return
 		get_node("..").remove_entity(self)
 		
 func heal(amount):

@@ -13,7 +13,6 @@ var money setget money_set
 export var cost_update = 0
 export var increase_cost = 40
 export var nb_entities = 0
-export var nb_medics = 0
 
 var building_ui = load("res://scripts/BuildingUI.gd").new()
 
@@ -54,7 +53,7 @@ func _unhandled_input(event):
 		if event.button_index == BUTTON_LEFT && event.pressed && medics.size() && type_building == 'medic':
 			var cost = medics[medic_index].cost
 			if cost > money: return
-			if nb_medics != 0:
+			if nb_entities != 0:
 				cost_update = cost + increase_cost * nb_entities
 			else:
 				cost_update = cost
@@ -66,7 +65,7 @@ func _unhandled_input(event):
 			if entity: 
 				money_set(money - cost_update)
 				building_ui.increase_cost_medic()
-				nb_medics += 1
+				nb_entities += 1
 		if event.button_index == BUTTON_RIGHT && event.pressed:
 			var tile_pos = world.tile_map.world_to_map(event.position)
 			if tile_pos.x > 0 && tile_pos.x < world.width && tile_pos.y > 0 && tile_pos.y < world.height && world.entities[tile_pos.x][tile_pos.y]:
