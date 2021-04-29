@@ -34,7 +34,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8, 8 )
 
-[node name="Blue Spell" type="Area2D"]
+[node name="Rocs" type="Area2D"]
 script = ExtResource( 2 )
 damage = 8.0
 speed = 50.0
@@ -42,6 +42,7 @@ duration = 10.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
+frame = 3
 speed_scale = 2.0
 playing = true
 

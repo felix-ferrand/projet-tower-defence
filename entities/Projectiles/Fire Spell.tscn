@@ -34,7 +34,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 5, 5 )
 
-[node name="Blue Spell" type="Area2D"]
+[node name="Fire Spell" type="Area2D"]
 script = ExtResource( 2 )
 speed = 100.0
 duration = 2.0
@@ -42,7 +42,7 @@ duration = 2.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 speed_scale = 2.0
 playing = true
 

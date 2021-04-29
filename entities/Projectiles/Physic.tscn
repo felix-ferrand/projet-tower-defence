@@ -6,22 +6,22 @@
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 15, 15 )
+region = Rect2( 0, 30, 15, 15 )
 
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 15, 0, 15, 15 )
+region = Rect2( 15, 30, 15, 15 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 30, 0, 15, 15 )
+region = Rect2( 30, 30, 15, 15 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 1 )
-region = Rect2( 45, 0, 15, 15 )
+region = Rect2( 45, 30, 15, 15 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
@@ -32,17 +32,17 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 3, 3 )
+extents = Vector2( 8, 8 )
 
-[node name="Blue Spell" type="Area2D"]
+[node name="Physic" type="Area2D"]
 script = ExtResource( 2 )
-damage = 2.0
-speed = 100.0
-duration = 2.0
+damage = 8.0
+speed = 50.0
+duration = 1.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 5 )
+frame = 2
 speed_scale = 2.0
 playing = true
 
