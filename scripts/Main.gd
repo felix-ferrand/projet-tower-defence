@@ -66,7 +66,7 @@ func _unhandled_input(event):
 						cost_update = cost + increase_cost * (nb_entities - 1)
 					else:
 						cost_update = cost
-					money_set(money + cost_update)
+					money_set(money + cost_update / 2)
 					building_ui.decrease_cost()
 					world.remove_entity(entity)
 					nb_entities -= 1
