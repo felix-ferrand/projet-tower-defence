@@ -54,12 +54,16 @@ func take_damage(amount):
 		main.money += reward
 			
 func give_damage(target):
-	print(target)	 
 	if target.has_method("take_damage"): 
 		target.take_damage(damage_points)
 		
-	# On détruit le kamikaze après avoir infligé les dégats
-	queue_free()
+		self.get_node("AnimatedSprite").play("death")
 		
+		var t = Timer.new()
+		# On détruit le kamikaze après avoir infligé les dégats
+		t.connect("timeout", self, "queue_free")
+		add_child(t)
+		t.set_one_shot(true)
+		t.start(1)
 func _exit_tree():
 	world.remove_enemy(self)
