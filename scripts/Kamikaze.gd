@@ -35,6 +35,10 @@ func _process(delta):
 		
 		if target != null && target.destinations.size() > 0:
 			var target_destination: Vector2 = target.destinations[0]
+			var distance_save = target_destination.distance_to(tile_pos)
+			for target_save in target.destinations:
+				if distance_save > target_save.distance_to(tile_pos):
+					target_destination = Vector2(target_save)
 			if target_destination.distance_to(tile_pos) > 1:
 				return
 
