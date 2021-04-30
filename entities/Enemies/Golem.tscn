@@ -75,12 +75,12 @@ position = Vector2( 3.8147e-06, 0.0662174 )
 collision_layer = 0
 collision_mask = 2147483688
 script = ExtResource( 2 )
-attack_range = 2.0
+attack_range = 32.0
 attack_speed = 3.0
 projectile = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 15.7725, 16.1873 )
 frames = SubResource( 10 )
-frame = 3
+frame = 2
 playing = true

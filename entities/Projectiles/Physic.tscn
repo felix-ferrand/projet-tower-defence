@@ -38,10 +38,11 @@ extents = Vector2( 8, 8 )
 script = ExtResource( 2 )
 damage = 15.0
 speed = 50.0
-duration = 1.0
+duration = 2.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 5 )
+frame = 2
 speed_scale = 2.0
 playing = true
 
