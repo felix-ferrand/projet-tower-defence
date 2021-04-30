@@ -11,7 +11,7 @@ var medic_index = 0
 var type_building = ''
 var money setget money_set
 export var cost_update = 0
-export var increase_cost = 40
+export var increase_cost = 20
 export var nb_entities = 0
 
 var building_ui = load("res://scripts/BuildingUI.gd").new()

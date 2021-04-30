@@ -37,6 +37,8 @@ animations = [ {
 collision_layer = 2
 collision_mask = 0
 script = ExtResource( 2 )
+hitpoints = 80.0
+hitpoints_max = 80.0
 tag = "tower"
 type = "red-tower"
 
@@ -44,7 +46,7 @@ type = "red-tower"
 position = Vector2( 0, -32 )
 scale = Vector2( 0.64, 0.64 )
 frames = SubResource( 5 )
-frame = 1
+frame = 3
 speed_scale = 0.5
 playing = true
 centered = false

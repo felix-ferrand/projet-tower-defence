@@ -4,7 +4,7 @@ export (int) var width = 64
 export (int) var height = 64
 export (int) var starting_money = 300
 export (int) var wait_between_waves = 10
-export (float) var tower_cost = 40
+export (float) var tower_cost = 20
 export var movement_costs = {}
 export (PackedScene) var obstacle_entity
 var entities = []

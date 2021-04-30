@@ -35,16 +35,16 @@ func _on_button_medic(indexWizard):
 	
 func increase_cost_tower():
 	for label_cost in labels_cost_tower:
-		label_cost.text = str(float(label_cost.text) + 40)
+		label_cost.text = str(float(label_cost.text) + 20)
 	
 func decrease_cost_tower():
 	for label_cost in labels_cost_tower:
-		label_cost.text = str(float(label_cost.text) - 40)
+		label_cost.text = str(float(label_cost.text) - 20)
 		
 func increase_cost_medic():
 	for label_cost in labels_cost_medic:
-		label_cost.text = str(float(label_cost.text) + 40)
+		label_cost.text = str(float(label_cost.text) + 20)
 	
 func decrease_cost_medic():
 	for label_cost in labels_cost_medic:
-		label_cost.text = str(float(label_cost.text) - 40)
+		label_cost.text = str(float(label_cost.text) - 20)

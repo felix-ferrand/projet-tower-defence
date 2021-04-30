@@ -38,4 +38,4 @@ func shoot():
 		bullet.collision_layer = 0
 		bullet.collision_mask = collision_mask
 		bullet.position = parent.position + Vector2(16,16)
-		bullet.fire((target.position - parent.position + Vector2(16,16)).normalized())
+		bullet.fire((target.position - parent.position).normalized())

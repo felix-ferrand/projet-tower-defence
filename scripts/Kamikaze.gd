@@ -35,7 +35,7 @@ func _process(delta):
 		
 		if target != null && target.destinations.size() > 0:
 			var target_destination: Vector2 = target.destinations[0]
-			if target_destination.distance_to(tile_pos) > 1.5:
+			if target_destination.distance_to(tile_pos) > 1:
 				return
 
 			var tower = world.entities[target_destination.x][target_destination.y]
